@@ -19,6 +19,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import menu.MiniGameCollection;
+import menu.SelectShop;
+import menu.TestHomeScreen;
 
 /**
  * Created by iuchi on 2017/08/06.
@@ -101,7 +103,7 @@ public class TSGShopScreen extends ScreenAdapter{
                 Rectangle back = new Rectangle(0, 0, backButton.getWidth(), backButton.getHeight());
                 if(back.contains(x, y)) {
                     stage.dispose();
-                    mGame.setScreen(new TSGGameScreen(mGame));
+                    mGame.setScreen(new SelectShop(mGame));
                 }
             }
         });

@@ -18,6 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import jp.MonckeyClimb.MonkeyShopScreen;
+import jp.targetshootinggame.TSGShopScreen;
 import jp.volcannogame.GameScreenWithStage;
 import jp.volcannogame.ShopScreen;
 
@@ -42,8 +43,8 @@ public class SelectShop extends ScreenAdapter {
     BitmapFont mFont;
 
     //ボタン
-    Button volcanoShop;
-    Button monkeyShop;
+    Button volcanoShop;Button monkeyShop;
+    Button bambooShootingShop;
     Button backButton;
 
     public SelectShop(MiniGameCollection game){
@@ -62,12 +63,17 @@ public class SelectShop extends ScreenAdapter {
         //ボタン
         TextureRegion volcanoRegion = new TextureRegion(new Texture("volcano_select.png"), 600, 100);
         TextureRegion monkeyRegion = new TextureRegion(new Texture("monkey_select.png"), 600, 100);
+        TextureRegion bambooShootingRegion = new TextureRegion(new Texture("bamboo_shooting_select.png"), 600, 100);
         Button.ButtonStyle volcanoButtonStyle = new Button.ButtonStyle();
         volcanoButtonStyle.up = new TextureRegionDrawable(volcanoRegion);
         volcanoButtonStyle.down = new TextureRegionDrawable(volcanoRegion);
         Button.ButtonStyle monkeyButtonStyle = new Button.ButtonStyle();
         monkeyButtonStyle.up = new TextureRegionDrawable(monkeyRegion);
         monkeyButtonStyle.down = new TextureRegionDrawable(monkeyRegion);
+        Button.ButtonStyle bambooShootingStyle = new Button.ButtonStyle();
+        bambooShootingStyle.up = new TextureRegionDrawable(bambooShootingRegion);
+        bambooShootingStyle.down = new TextureRegionDrawable(bambooShootingRegion);
+
         //火山
         volcanoShop = new Button(volcanoButtonStyle);
         volcanoShop.setSize(CAMERA_WIDTH / 5 * 4, CAMERA_HEIGHT / 10);
@@ -128,6 +134,36 @@ public class SelectShop extends ScreenAdapter {
                 }
             }
         });
+        //bambooShooting
+        bambooShootingShop = new Button(bambooShootingStyle);
+        bambooShootingShop.setSize(CAMERA_WIDTH / 5 * 4, CAMERA_HEIGHT / 10);
+        bambooShootingShop.setPosition(CAMERA_WIDTH / 10, CAMERA_HEIGHT / 2 - 130);
+        bambooShootingShop.addListener(new InputListener(){
+            public void touchDragged (InputEvent event, float x, float y, int pointer){
+                Rectangle bamboo = new Rectangle(0, 0, bambooShootingShop.getWidth(), bambooShootingShop.getHeight());
+                if(bamboo.contains(x, y)){
+                    bambooShootingShop.setSize(CAMERA_WIDTH / 5 * 4  * 0.96f, CAMERA_HEIGHT / 10 * 0.96f);
+                    bambooShootingShop.setPosition(CAMERA_WIDTH / 10 + CAMERA_WIDTH / 5 * 4  * 0.02f, CAMERA_HEIGHT / 2 - 130 + CAMERA_HEIGHT / 10 * 0.02f);
+                }else {
+                    bambooShootingShop.setSize(CAMERA_WIDTH / 5 * 4, CAMERA_HEIGHT / 10);
+                    bambooShootingShop.setPosition(CAMERA_WIDTH / 10 , CAMERA_HEIGHT / 2 - 130);
+                }
+            }
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                bambooShootingShop.setSize(CAMERA_WIDTH / 5 * 4  * 0.96f, CAMERA_HEIGHT / 10 * 0.96f);
+                bambooShootingShop.setPosition(CAMERA_WIDTH / 10 + CAMERA_WIDTH / 5 * 4  * 0.02f, CAMERA_HEIGHT / 2 - 130 + CAMERA_HEIGHT / 10 * 0.02f);
+                return true;
+            }
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                Rectangle bamboo = new Rectangle(0, 0, bambooShootingShop.getWidth(), bambooShootingShop.getHeight());
+                bambooShootingShop.setSize(CAMERA_WIDTH / 5 * 4, CAMERA_HEIGHT / 10);
+                bambooShootingShop.setPosition(CAMERA_WIDTH / 10 , CAMERA_HEIGHT / 2 - 130);
+                if(bamboo.contains(x, y)) {
+                    stage.dispose();
+                    mGame.setScreen(new TSGShopScreen(mGame));
+                }
+            }
+        });
 
         //バックボタン
         TextureRegion backRegion = new TextureRegion(new Texture("backbutton.png"), 420, 420);
@@ -171,6 +207,7 @@ public class SelectShop extends ScreenAdapter {
         stage = new Stage(new FitViewport(CAMERA_WIDTH, CAMERA_HEIGHT));
         stage.addActor(volcanoShop);
         stage.addActor(monkeyShop);
+        stage.addActor(bambooShootingShop);
         stage.addActor(backButton);
         Gdx.input.setInputProcessor(stage);
         Matrix4 cameraMatrix = stage.getViewport().getCamera().combined;

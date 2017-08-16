@@ -61,6 +61,13 @@ public class TSGGameScreen extends ScreenAdapter{
     //銃
     Gun mGun;
 
+    //アタッチメント
+    Sprite bipod;
+    Sprite scope8x;
+    Sprite metalFrame1;
+    Sprite metalFrame2;
+    Sprite magazine;
+
     //弾
     public static final int BULLET_STATE_NOMAL = 0;
     int bulletState;
@@ -383,6 +390,31 @@ public class TSGGameScreen extends ScreenAdapter{
         mGun = new Gun(BambooGunTexture, 0, 0, 44, 256);
         mGun.setPosition(CAMERA_WIDTH / 2 - mGun.getWidth()/ 2, 0);
 
+        //アタッチメント
+        if(mPrefs.getInteger("BIPOD", 0) == 2){
+            bipod = new Sprite(new Texture("bi_pod.png"), 106, 22);
+            bipod.setSize(106 / 5 * 2, 22 / 5 * 2);
+            bipod.setPosition(mGun.getX() + mGun.getWidth() / 2 - bipod.getWidth() / 2, mGun.getHeight() / 3 * 2);
+        }
+        if(mPrefs.getInteger("8xSCOPE", 0) == 2){
+            scope8x = new Sprite(new Texture("8xScope.png"), 22, 94);
+            scope8x.setSize(22 / 5 * 2, 94 / 5 * 2);
+            scope8x.setPosition(mGun.getX() + mGun.getWidth() / 2 - scope8x.getWidth() / 2, mGun.getHeight() / 5 * 1);
+        }
+        if(mPrefs.getInteger("MAGAZINE", 0) == 2){
+            magazine = new Sprite(new Texture("magazine.png"), 64, 43);
+            magazine.setSize(64 / 5 * 2, 43 / 5 * 2);
+            magazine.setPosition(mGun.getX() + mGun.getWidth() / 2 - magazine.getWidth(), mGun.getHeight() / 5 * 2);
+        }
+        if(mPrefs.getInteger("METAL FRAME", 0) == 2){
+            metalFrame1 = new Sprite(new Texture("gun_frame1.png"), 44, 256);
+            metalFrame2 = new Sprite(new Texture("gun_frame2.png"), 44, 256);
+            metalFrame1.setSize(44 / 5 * 2, 256 / 5 * 2);
+            metalFrame2.setSize(44 / 5 * 2, 256 / 5 * 2);
+            metalFrame1.setPosition(mGun.getX() + mGun.getWidth() / 2 - metalFrame1.getWidth() / 2, 0);
+            metalFrame2.setPosition(mGun.getX() + mGun.getWidth() / 2 - metalFrame2.getWidth() / 2, 0);
+        }
+
         //弾
         bullets = new ArrayList<Bullet>();
         bulletTexture = new Texture("Bullet.png");
@@ -435,7 +467,21 @@ public class TSGGameScreen extends ScreenAdapter{
 
         mGame.batch.begin();
         whiteBg.draw(mGame.batch);
+        if(mPrefs.getInteger("BIPOD", 0) == 2){
+            bipod.draw(mGame.batch);
+        }
         mGun.draw(mGame.batch);
+        if(mPrefs.getInteger("8xSCOPE", 0) == 2){
+            scope8x.draw(mGame.batch);
+        }
+        if(mPrefs.getInteger("MAGAZINE", 0) == 2){
+            magazine.draw(mGame.batch);
+        }
+        if(mPrefs.getInteger("METAL FRAME", 0) == 2){
+            metalFrame1.draw(mGame.batch);
+            metalFrame2.draw(mGame.batch);
+        }
+
         for(int i = 0; i < bullets.size(); i++){
             bullets.get(i).draw(mGame.batch);
         }
@@ -596,6 +642,19 @@ public class TSGGameScreen extends ScreenAdapter{
                 }else {
                     mGun.setX(CAMERA_WIDTH - mGun.getWidth());
                 }
+            }
+            if(mPrefs.getInteger("BIPOD", 0) == 2){
+                bipod.setPosition(mGun.getX() + mGun.getWidth() / 2 - bipod.getWidth() / 2, mGun.getHeight() / 3 * 2);
+            }
+            if(mPrefs.getInteger("8xSCOPE", 0) == 2){
+                scope8x.setPosition(mGun.getX() + mGun.getWidth() / 2 - scope8x.getWidth() / 2, mGun.getHeight() / 5 * 1);
+            }
+            if(mPrefs.getInteger("MAGAZINE", 0) == 2){
+                magazine.setPosition(mGun.getX() + mGun.getWidth() / 2 - magazine.getWidth(), mGun.getHeight() / 5 * 2);
+            }
+            if(mPrefs.getInteger("METAL FRAME", 0) == 2){
+                metalFrame1.setPosition(mGun.getX() + mGun.getWidth() / 2 - metalFrame1.getWidth() / 2, 0);
+                metalFrame2.setPosition(mGun.getX() + mGun.getWidth() / 2 - metalFrame2.getWidth() / 2, 0);
             }
         }
 
