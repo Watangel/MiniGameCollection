@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import jp.MonckeyClimb.MonkeyShopScreen;
 import jp.MonckeyClimb.PlayScreen;
+import jp.targetshootinggame.TSGGameScreen;
 import jp.volcannogame.GameScreenWithStage;
 import jp.volcannogame.ShopScreen;
 
@@ -35,6 +36,7 @@ public class SelectGame extends ScreenAdapter {
     //ボタン
     Button volcanoGame;
     Button monkeyGame;
+    Button bambooShooting;
     Button backButton;
 
     //ステージ
@@ -49,12 +51,17 @@ public class SelectGame extends ScreenAdapter {
         //ボタン
         TextureRegion volcanoRegion = new TextureRegion(new Texture("volcano_select.png"), 600, 100);
         TextureRegion monkeyRegion = new TextureRegion(new Texture("monkey_select.png"), 600, 100);
+        TextureRegion bambooShootingRegion = new TextureRegion(new Texture("bamboo_shooting_select.png"), 600, 100);
         Button.ButtonStyle volcanoButtonStyle = new Button.ButtonStyle();
         volcanoButtonStyle.up = new TextureRegionDrawable(volcanoRegion);
         volcanoButtonStyle.down = new TextureRegionDrawable(volcanoRegion);
         Button.ButtonStyle monkeyButtonStyle = new Button.ButtonStyle();
         monkeyButtonStyle.up = new TextureRegionDrawable(monkeyRegion);
         monkeyButtonStyle.down = new TextureRegionDrawable(monkeyRegion);
+        Button.ButtonStyle bambooShootingStyle = new Button.ButtonStyle();
+        bambooShootingStyle.up = new TextureRegionDrawable(bambooShootingRegion);
+        bambooShootingStyle.down = new TextureRegionDrawable(bambooShootingRegion);
+
         //火山
         volcanoGame = new Button(volcanoButtonStyle);
         volcanoGame.setSize(CAMERA_WIDTH / 5 * 4, CAMERA_HEIGHT / 10);
@@ -116,6 +123,37 @@ public class SelectGame extends ScreenAdapter {
             }
         });
 
+        //竹ショット
+        bambooShooting = new Button(bambooShootingStyle);
+        bambooShooting.setSize(CAMERA_WIDTH / 5 * 4, CAMERA_HEIGHT / 10);
+        bambooShooting.setPosition(CAMERA_WIDTH / 10, CAMERA_HEIGHT / 2 - 130);
+        bambooShooting.addListener(new InputListener(){
+            public void touchDragged (InputEvent event, float x, float y, int pointer){
+                Rectangle bambooSelect = new Rectangle(0, 0, bambooShooting.getWidth(), bambooShooting.getHeight());
+                if(bambooSelect.contains(x, y)){
+                    bambooShooting.setSize(CAMERA_WIDTH / 5 * 4  * 0.96f, CAMERA_HEIGHT / 10 * 0.96f);
+                    bambooShooting.setPosition(CAMERA_WIDTH / 10 + CAMERA_WIDTH / 5 * 4  * 0.02f, CAMERA_HEIGHT / 2 - 130 + CAMERA_HEIGHT / 10 * 0.02f);
+                }else {
+                    bambooShooting.setSize(CAMERA_WIDTH / 5 * 4, CAMERA_HEIGHT / 10);
+                    bambooShooting.setPosition(CAMERA_WIDTH / 10 , CAMERA_HEIGHT / 2 - 130);
+                }
+            }
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                bambooShooting.setSize(CAMERA_WIDTH / 5 * 4  * 0.96f, CAMERA_HEIGHT / 10 * 0.96f);
+                bambooShooting.setPosition(CAMERA_WIDTH / 10 + CAMERA_WIDTH / 5 * 4  * 0.02f, CAMERA_HEIGHT / 2 - 130 + CAMERA_HEIGHT / 10 * 0.02f);
+                return true;
+            }
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                Rectangle monkey = new Rectangle(0, 0, bambooShooting.getWidth(), bambooShooting.getHeight());
+                bambooShooting.setSize(CAMERA_WIDTH / 5 * 4, CAMERA_HEIGHT / 10);
+                bambooShooting.setPosition(CAMERA_WIDTH / 10 , CAMERA_HEIGHT / 2 - 130);
+                if(monkey.contains(x, y)) {
+                    stage.dispose();
+                    mGame.setScreen(new TSGGameScreen(mGame));
+                }
+            }
+        });
+
         //バックボタン
         TextureRegion backRegion = new TextureRegion(new Texture("backbutton.png"), 420, 420);
         Button.ButtonStyle backButtonStyle = new Button.ButtonStyle();
@@ -159,6 +197,7 @@ public class SelectGame extends ScreenAdapter {
         Gdx.input.setInputProcessor(stage);
         stage.addActor(volcanoGame);
         stage.addActor(monkeyGame);
+        stage.addActor(bambooShooting);
         stage.addActor(backButton);
         Matrix4 cameraMatrix = stage.getViewport().getCamera().combined;
         mGame.batch.setProjectionMatrix(cameraMatrix);

@@ -23,8 +23,11 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import java.util.ArrayList;
 import java.util.Random;
 
+import menu.MiniGameCollection;
+import menu.TestHomeScreen;
+
 public class TSGGameScreen extends ScreenAdapter{
-    private TargetShootingGame mGame;
+    private MiniGameCollection mGame;
 
     //画面幅、高さ
     static final float CAMERA_WIDTH = 300;
@@ -117,7 +120,7 @@ public class TSGGameScreen extends ScreenAdapter{
     Preferences coinPrefs;
 
 
-    public TSGGameScreen(TargetShootingGame game){
+    public TSGGameScreen(MiniGameCollection game){
         mGame = game;
         mPrefs = Gdx.app.getPreferences("TargetShootingGame");
         bulletState = BULLET_STATE_NOMAL;
@@ -270,7 +273,7 @@ public class TSGGameScreen extends ScreenAdapter{
                 if(startRect.contains(x, y)){
                     mainStage.dispose();
                     stopStage.dispose();
-                    mGame.setScreen(new TSGGameScreen(mGame));
+                    mGame.setScreen(new TestHomeScreen(mGame));
                 }
             }
         });
@@ -302,32 +305,27 @@ public class TSGGameScreen extends ScreenAdapter{
                 return true;
             }
             public void touchUp(InputEvent event, float x, float y, int pointer, int button){
-                Rectangle chargeRect = new Rectangle(0, 0, chargeButton.getWidth(), chargeButton.getHeight());
-                if(chargeRect.contains(x, y)){
-                    bulletState = BULLET_STATE_NOMAL;
-                    if(chargeLevel >= 30 && chargeLevel < 60){
-                        bullet = new Bullet(bulletTexture, 0, 0, 128, 128, 0.8f * 1.1f - 0.1f * (float)mPrefs.getInteger("ACCURACY, 1"), 1, mPrefs.getInteger("MUZZLE VELOCITY", 2));
-                        bullet.setSize(30, 30);
-                        bullet.setPosition(mGun.getX() + mGun.getWidth() / 2 - bullet.getWidth() / 2, mGun.getY() + mGun.getHeight());
-                        bullets.add(bullet);
-                        chargeLevel = 0;
-                    }else if(chargeLevel >= 60 && chargeLevel < 90){
-                        bullet = new Bullet(bulletTexture, 0, 0, 128, 128, 0.5f * 1.1f - 0.1f * (float)mPrefs.getInteger("ACCURACY, 1"), 2, mPrefs.getInteger("MUZZLE VELOCITY", 2));
-                        bullet.setSize(60, 60);
-                        bullet.setPosition(mGun.getX() + mGun.getWidth() / 2 - bullet.getWidth() / 2, mGun.getY() + mGun.getHeight());
-                        bullets.add(bullet);
-                        chargeLevel = 0;
-                    }else if(chargeLevel >= 90){
-                        bullet = new Bullet(bulletTexture, 0, 0, 128, 128, 0.3f * 1.1f - 0.1f * (float)mPrefs.getInteger("ACCURACY, 1"), 3, mPrefs.getInteger("MUZZLE VELOCITY", 2));
-                        bullet.setSize(90, 90);
-                        bullet.setPosition(mGun.getX() + mGun.getWidth() / 2 - bullet.getWidth() / 2, mGun.getY() + mGun.getHeight());
-                        bullets.add(bullet);
-                        chargeLevel = 0;
-                    }
+                bulletState = BULLET_STATE_NOMAL;
+                if(chargeLevel >= 30 && chargeLevel < 60){
+                    bullet = new Bullet(bulletTexture, 0, 0, 128, 128, 0.8f * 1.1f - 0.1f * (float)mPrefs.getInteger("ACCURACY, 1"), 1, mPrefs.getInteger("MUZZLE VELOCITY", 2));
+                    bullet.setSize(30, 30);
+                    bullet.setPosition(mGun.getX() + mGun.getWidth() / 2 - bullet.getWidth() / 2, mGun.getY() + mGun.getHeight());
+                    bullets.add(bullet);
                     chargeLevel = 0;
-                }else{
-                    bulletState = BULLET_STATE_NOMAL;
+                }else if(chargeLevel >= 60 && chargeLevel < 90){
+                    bullet = new Bullet(bulletTexture, 0, 0, 128, 128, 0.5f * 1.1f - 0.1f * (float)mPrefs.getInteger("ACCURACY, 1"), 2, mPrefs.getInteger("MUZZLE VELOCITY", 2));
+                    bullet.setSize(60, 60);
+                    bullet.setPosition(mGun.getX() + mGun.getWidth() / 2 - bullet.getWidth() / 2, mGun.getY() + mGun.getHeight());
+                    bullets.add(bullet);
+                    chargeLevel = 0;
+                }else if(chargeLevel >= 90){
+                    bullet = new Bullet(bulletTexture, 0, 0, 128, 128, 0.3f * 1.1f - 0.1f * (float)mPrefs.getInteger("ACCURACY, 1"), 3, mPrefs.getInteger("MUZZLE VELOCITY", 2));
+                    bullet.setSize(90, 90);
+                    bullet.setPosition(mGun.getX() + mGun.getWidth() / 2 - bullet.getWidth() / 2, mGun.getY() + mGun.getHeight());
+                    bullets.add(bullet);
+                    chargeLevel = 0;
                 }
+                chargeLevel = 0;
             }
         });
 
@@ -466,6 +464,7 @@ public class TSGGameScreen extends ScreenAdapter{
             chargeGaugeLine2.draw(mGame.batch);
         }
         mGame.batch.end();
+
 
         if(mGameState == GAME_STATE_STOP){
             stopStage.draw();

@@ -18,6 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import menu.MiniGameCollection;
+
 /**
  * Created by iuchi on 2017/08/06.
  */
@@ -26,7 +28,7 @@ public class TSGShopScreen extends ScreenAdapter{
     static final float CAMERA_WIDTH = 300;
     static final float CAMERA_HEIGHT = 450;
 
-    TargetShootingGame mGame;
+    MiniGameCollection mGame;
 
     Sprite mBg;
 
@@ -53,7 +55,7 @@ public class TSGShopScreen extends ScreenAdapter{
     Sprite gunState;
     Sprite gunStateGageSpr;
 
-    public TSGShopScreen(TargetShootingGame game){
+    public TSGShopScreen(MiniGameCollection game){
         mGame = game;
 
         //Preference
