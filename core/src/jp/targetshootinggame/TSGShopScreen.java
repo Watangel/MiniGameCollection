@@ -30,6 +30,20 @@ public class TSGShopScreen extends ScreenAdapter{
     static final float CAMERA_WIDTH = 300;
     static final float CAMERA_HEIGHT = 450;
 
+    static final int STATE_NOMAL = 0;
+    static final int STATE_CHECK_PURCHASE = 1;
+
+    static final int CHECK_PURCHASE_BIPOD = 0;
+    static final int CHECK_PURCHASE_SCOPE = 1;
+    static final int CHECK_PURCHASE_METAL_FRAME = 2;
+    static final int CHECK_PURCHASE_MGAZINE = 3;
+
+    private int customPrice;
+
+    private int checkPurchaseState;
+
+    private int mState;
+
     MiniGameCollection mGame;
 
     Sprite mBg;
@@ -39,6 +53,7 @@ public class TSGShopScreen extends ScreenAdapter{
 
     //ステージ
     Stage stage;
+    Stage purchaseStage;
 
     //Preference
     Preferences coinPrefs;
@@ -57,12 +72,29 @@ public class TSGShopScreen extends ScreenAdapter{
     Sprite gunState;
     Sprite gunStateGageSpr;
 
+    //checkPurchase
+    Sprite checkPurchaseBg;
+
     public TSGShopScreen(MiniGameCollection game){
         mGame = game;
 
         //Preference
         coinPrefs = Gdx.app.getPreferences("jp.MiniGameCollection");
         mPrefs = Gdx.app.getPreferences("TargetShootingGame");
+
+        //初期化
+/*        mPrefs.putInteger("BIPOD", 0);
+        mPrefs.putInteger("8xSCOPE", 0);
+        mPrefs.putInteger("MAGAZINE", 0);
+        mPrefs.putInteger("METAL FRAME", 0);
+        mPrefs.flush();*/
+        mPrefs.putInteger("MUZZLE VELOCITY", 2);
+        mPrefs.putInteger("ACCURACY", 1);
+        mPrefs.putInteger("RATE OF FIRE", 3);
+        mPrefs.flush();
+
+        mState = STATE_NOMAL;
+
 
         //背景
         Texture bgTexture = new Texture("ShopBg.png");
@@ -143,7 +175,8 @@ public class TSGShopScreen extends ScreenAdapter{
                 Rectangle startRect = new Rectangle(0, 0, mButton.getWidth(), mButton.getHeight());
                 if(startRect.contains(x, y)){
                     if(mPrefs.getInteger("8xSCOPE", 0) == 0){
-                        mPrefs.putInteger("8xSCOPE", 1);
+                        checkPurchaseState = CHECK_PURCHASE_SCOPE;
+                        checkPurchase(500);
                     }
                     if(mPrefs.getInteger("8xSCOPE", 0) == 1){
                         mPrefs.putInteger("8xSCOPE", 2);
@@ -171,7 +204,8 @@ public class TSGShopScreen extends ScreenAdapter{
                 Rectangle startRect = new Rectangle(0, 0, mButton.getWidth(), mButton.getHeight());
                 if(startRect.contains(x, y)){
                     if(mPrefs.getInteger("BIPOD", 0) == 0){
-                        mPrefs.putInteger("BIPOD", 1);
+                        checkPurchaseState = CHECK_PURCHASE_BIPOD;
+                        checkPurchase(500);
                     }
                     if(mPrefs.getInteger("BIPOD", 0) == 1){
                         mPrefs.putInteger("BIPOD", 2);
@@ -199,7 +233,8 @@ public class TSGShopScreen extends ScreenAdapter{
                 Rectangle startRect = new Rectangle(0, 0, mButton.getWidth(), mButton.getHeight());
                 if(startRect.contains(x, y)){
                     if(mPrefs.getInteger("MAGAZINE", 0) == 0){
-                        mPrefs.putInteger("MAGAZINE", 1);
+                        checkPurchaseState = CHECK_PURCHASE_MGAZINE;
+                        checkPurchase(800);
                     }
                     if(mPrefs.getInteger("MAGAZINE", 0) == 1){
                         mPrefs.putInteger("MAGAZINE", 2);
@@ -227,7 +262,8 @@ public class TSGShopScreen extends ScreenAdapter{
                 Rectangle startRect = new Rectangle(0, 0, mButton.getWidth(), mButton.getHeight());
                 if(startRect.contains(x, y)){
                     if(mPrefs.getInteger("METAL FRAME", 0) == 0){
-                        mPrefs.putInteger("METAL FRAME", 1);
+                        checkPurchaseState = CHECK_PURCHASE_METAL_FRAME;
+                        checkPurchase(700);
                     }
                     if(mPrefs.getInteger("METAL FRAME", 0) == 1){
                         mPrefs.putInteger("METAL FRAME", 2);
@@ -242,6 +278,8 @@ public class TSGShopScreen extends ScreenAdapter{
             }
         });
 
+
+
         //ステータス
         gunState = new Sprite(new Texture("gun_state.png"), 150, 90);
         gunState.setPosition(CAMERA_WIDTH / 10 * 1, CAMERA_HEIGHT / 5 * 3);
@@ -249,14 +287,75 @@ public class TSGShopScreen extends ScreenAdapter{
 
         //ステージ
         stage = new Stage(new FitViewport(CAMERA_WIDTH, CAMERA_HEIGHT));
-        Gdx.input.setInputProcessor(stage);
         stage.addActor(backButton);
         stage.addActor(scope8xButton);
         stage.addActor(bipodButton);
         stage.addActor(magazineButton);
         stage.addActor(frameButton);
-        Matrix4 cameraMatrix = stage.getViewport().getCamera().combined;
-        mGame.batch.setProjectionMatrix(cameraMatrix);
+
+
+        //checkPurchase
+        checkPurchaseBg = new Sprite(new Texture("buttonbackground.png"), 600, 400);
+        checkPurchaseBg.setSize(CAMERA_WIDTH / 6 * 5, CAMERA_HEIGHT / 3 * 1);
+        checkPurchaseBg.setPosition(CAMERA_WIDTH / 2 - checkPurchaseBg.getWidth() / 2, CAMERA_HEIGHT / 2 - checkPurchaseBg.getHeight() / 2);
+        //purchase Stage
+        TextureRegion endRegion = new TextureRegion(new Texture("monkeynobutton.png"), 420, 420);
+        Button.ButtonStyle endButtonStyle = new Button.ButtonStyle();
+        endButtonStyle.up = new TextureRegionDrawable(endRegion);
+        endButtonStyle.down = new TextureRegionDrawable(endRegion);
+        Button endButton = new Button(endButtonStyle);
+        endButton.setSize(50, 50);
+        endButton.setPosition(checkPurchaseBg.getX() + checkPurchaseBg.getWidth() - 60, checkPurchaseBg.getY() + checkPurchaseBg.getHeight() - 60);
+        endButton.addListener(new ButtonInputListener(endButton, 0.96f){
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button){
+                super.touchUp(event, x, y, pointer, button);
+                Rectangle endRect = new Rectangle(0, 0, mButton.getWidth(), mButton.getHeight());
+                if(endRect.contains(x, y)){
+                    mState = STATE_NOMAL;
+                }
+            }
+        });
+
+        TextureRegion purchaseRegion = new TextureRegion(new Texture("monkeyokbutton.png"), 420, 420);
+        Button.ButtonStyle purchaseStyle = new Button.ButtonStyle();
+        purchaseStyle.up = new TextureRegionDrawable(purchaseRegion);
+        purchaseStyle.down = new TextureRegionDrawable(purchaseRegion);
+        Button purchaseButton = new Button(purchaseStyle);
+        purchaseButton.setSize(50, 50);
+        purchaseButton.setPosition(checkPurchaseBg.getX() + checkPurchaseBg.getWidth() / 2 - purchaseButton.getWidth() /2, checkPurchaseBg.getY() + 20);
+        purchaseButton.addListener(new ButtonInputListener(purchaseButton, 0.96f){
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button){
+                super.touchUp(event, x, y, pointer, button);
+                Rectangle purchaseRect = new Rectangle(0, 0, mButton.getWidth(), mButton.getHeight());
+                if(purchaseRect.contains(x, y)){
+                    if(coinPrefs.getInteger("COIN", 0) >= customPrice){
+                        coinPrefs.putInteger("COIN", coinPrefs.getInteger("COIN", 0) - customPrice);
+                        coinPrefs.flush();
+                        switch(checkPurchaseState){
+                            case CHECK_PURCHASE_BIPOD:
+                                mPrefs.putInteger("BIPOD", 2);
+                                break;
+                            case CHECK_PURCHASE_SCOPE:
+                                mPrefs.putInteger("8xSCOPE", 2);
+                                break;
+                            case CHECK_PURCHASE_MGAZINE:
+                                mPrefs.putInteger("MAGAZINE", 2);
+                                break;
+                            case CHECK_PURCHASE_METAL_FRAME:
+                                mPrefs.putInteger("METAL FRAME", 2);
+                                break;
+                        }
+                        mPrefs.flush();
+                        mState = STATE_NOMAL;
+                    }
+                }
+            }
+        });
+
+        purchaseStage = new Stage(new FitViewport(CAMERA_WIDTH, CAMERA_HEIGHT));
+        purchaseStage.addActor(endButton);
+        purchaseStage.addActor(purchaseButton);
+
     }
 
     @Override
@@ -264,10 +363,23 @@ public class TSGShopScreen extends ScreenAdapter{
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        if(mState == STATE_NOMAL){
+            Gdx.input.setInputProcessor(stage);
+            Matrix4 cameraMatrix = stage.getViewport().getCamera().combined;
+            mGame.batch.setProjectionMatrix(cameraMatrix);
+        }
         stage.act();
+        if(mState == STATE_CHECK_PURCHASE){
+            Gdx.input.setInputProcessor(purchaseStage);
+            Matrix4 cameraMatrix = purchaseStage.getViewport().getCamera().combined;
+            mGame.batch.setProjectionMatrix(cameraMatrix);
+        }
+        purchaseStage.act();
+
 
         mGame.batch.begin();
         mBg.draw(mGame.batch);
+        mFont.getData().setScale(1);
         mFont.draw(mGame.batch, "COIN:" + coinPrefs.getInteger("COIN", 0), 60, 430);
         //shop
         if(mPrefs.getInteger("BIPOD", 0) == 2){
@@ -284,12 +396,25 @@ public class TSGShopScreen extends ScreenAdapter{
         if(mPrefs.getInteger("MAGAZINE", 0) == 2){
             magazine.draw(mGame.batch);
         }
-        //state
         gunStateDraw();
-        gunState.draw(mGame.batch);
         mGame.batch.end();
 
         stage.draw();
+
+        mGame.batch.begin();
+        //state
+        gunState.draw(mGame.batch);
+        if(mState == STATE_CHECK_PURCHASE){
+            checkPurchaseBg.draw(mGame.batch);
+            mFont.getData().setScale(1.2f);
+            mFont.draw(mGame.batch, "$" + customPrice, checkPurchaseBg.getX() + 50, checkPurchaseBg.getY() + 120);
+        }
+        mGame.batch.end();
+
+        if(mState == STATE_CHECK_PURCHASE){
+            purchaseStage.draw();
+        }
+
     }
 
     public void gunStateDraw(){
@@ -307,9 +432,15 @@ public class TSGShopScreen extends ScreenAdapter{
         gunStateGageSpr.draw(mGame.batch);
     }
 
+    private void checkPurchase(int price){
+        mState = STATE_CHECK_PURCHASE;
+        customPrice = price;
+    }
+
     @Override
     public void resize(int width, int height){
         stage.getViewport().update(width, height);
+        purchaseStage.getViewport().update(width, height);
         //       stageDrawable.getViewport().update(width, height);
     }
 }
