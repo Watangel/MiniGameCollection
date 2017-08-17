@@ -26,10 +26,6 @@ import java.util.Random;
 
 import menu.MiniGameCollection;
 
-/**
- * Created by iuchi on 2017/07/14.
- */
-
 public class GameScreenWithStage extends ScreenAdapter {
     private MiniGameCollection mGame;
 

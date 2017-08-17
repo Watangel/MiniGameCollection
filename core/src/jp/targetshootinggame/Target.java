@@ -5,10 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import java.util.Random;
 
-/**
- * Created by iuchi on 2017/07/25.
- */
-
 public class Target extends Sprite {
     float speed;
     float defaultSpeedParSec = 100;

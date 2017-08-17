@@ -2,13 +2,6 @@ package jp.targetshootinggame;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.Vector;
-import com.badlogic.gdx.math.Vector2;
-
-/**
- * Created by iuchi on 2017/07/24.
- */
 
 public class Gun extends Sprite {
     static final float GUN_WIDTH = 22 / 5 * 4;

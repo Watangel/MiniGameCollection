@@ -2,10 +2,6 @@ package jp.volcannogame;
 
 import com.badlogic.gdx.graphics.Texture;
 
-/**
- * Created by iuchi on 2017/07/07.
- */
-
 public class Lava extends GameObject {
     public static final int LAVA_STATE_READY = 0;
     public static final int LAVA_STATE_RUN = 1;

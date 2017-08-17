@@ -3,7 +3,6 @@ package jp.volcannogame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -19,11 +18,6 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import menu.MiniGameCollection;
-import menu.TestHomeScreen;
-
-/**
- * Created by iuchi on 2017/07/06.
- */
 
 public class ResultScreen extends ScreenAdapter {
     static final float GUI_WIDTH = 450;

@@ -2,10 +2,6 @@ package jp.MonckeyClimb;
 
 import com.badlogic.gdx.graphics.Texture;
 
-/**
- * Created by iuchi on 2017/07/08.
- */
-
 public class Coin extends ItemObject {
 
     public static final float COIN_WIDTH = 25;

@@ -2,10 +2,6 @@ package jp.MonckeyClimb;
 
 import com.badlogic.gdx.graphics.Texture;
 
-/**
- * Created by iuchi on 2017/07/04.
- */
-
 public class Heart extends ItemObject {
 
     public static final float HEART_WIDTH = 18.5f * 2;

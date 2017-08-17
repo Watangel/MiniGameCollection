@@ -3,10 +3,6 @@ package jp.targetshootinggame;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-/**
- * Created by iuchi on 2017/07/26.
- */
-
 public class BulletHole extends Sprite {
     float removeCount;
     float removeTime = 1;

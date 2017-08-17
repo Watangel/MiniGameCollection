@@ -2,10 +2,6 @@ package jp.MonckeyClimb;
 
 import com.badlogic.gdx.graphics.Texture;
 
-/**
- * Created by iuchi on 2017/06/28.
- */
-
 public class Monkey extends ItemObject {
 
     public static final float MONKEY_WIDTH = 81;
@@ -26,7 +22,6 @@ public class Monkey extends ItemObject {
 
     public Monkey(Texture texture, int X, int Y, int Width, int Height) {
         super(texture, X, Y, Width, Height);
-        //setSize(MONKEY_WIDTH, MONKEY_HEIGHT);
         State = MONKEY_STATE_STOP;
     }
 
@@ -34,7 +29,6 @@ public class Monkey extends ItemObject {
 
         if(State == MONKEY_STATE_CLIMB){
             vector.set(0, MONKEY_CLIMB_VELOCITY * delta);
-            //vector.add(0, 0.001f);
         }
 
         if(State == MONKEY_STATE_STOP || State == MONKEY_STATE_LEFT_NOW || State == MONKEY_STATE_RIGHT_NOW){

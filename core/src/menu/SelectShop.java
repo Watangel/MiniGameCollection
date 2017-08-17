@@ -19,12 +19,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import jp.MonckeyClimb.MonkeyShopScreen;
 import jp.targetshootinggame.TSGShopScreen;
-import jp.volcannogame.GameScreenWithStage;
 import jp.volcannogame.ShopScreen;
-
-/**
- * Created by iuchi on 2017/08/01.
- */
 
 public class SelectShop extends ScreenAdapter {
     static final float CAMERA_WIDTH = 300;

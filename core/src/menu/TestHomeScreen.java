@@ -16,18 +16,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-
-import jp.MonckeyClimb.PlayScreen;
-import jp.MonckeyClimb.StartScreen;
-import jp.volcannogame.GameScreenWithStage;
-import jp.volcannogame.ShopScreen;
-
-/**
- * Created by iuchi on 2017/07/11.
- */
 
 public class TestHomeScreen extends ScreenAdapter {
     static final float CAMERA_WIDTH = 300;
@@ -58,16 +48,6 @@ public class TestHomeScreen extends ScreenAdapter {
 
         mFont = new BitmapFont();
         mFont = new BitmapFont(Gdx.files.internal("font3.fnt"), Gdx.files.internal("font3_0.png"), false);
-
-  /*      buttonAtlas = new TextureAtlas("Button.txt");
-        TextureRegion upRegion = buttonAtlas.findRegion("ButtonUp");
-        TextureRegion downRegion = buttonAtlas.findRegion("ButtonDown");
-
-        buttonStyle = new TextButton.TextButtonStyle();
-        buttonStyle.font = mFont;
-        buttonStyle.up = new TextureRegionDrawable(upRegion);
-        buttonStyle.down = new TextureRegionDrawable(downRegion);
-  //      buttonStyle.down.setBottomHeight(-3);*/
 
         TextureRegion startRegion = new TextureRegion(new Texture("GameStartButton.png"), 600, 100);
         TextureRegion shopRegion = new TextureRegion(new Texture("ShopButton.png"), 600, 100);
@@ -142,16 +122,10 @@ public class TestHomeScreen extends ScreenAdapter {
                     System.out.println("ショップ");
                     stage.dispose();
                     mGame.setScreen(new SelectShop(mGame));
-    //                stage.dispose();
                 }
             }
         });
-/*
-        MoveToAction moveAction = new MoveToAction();//Add dynamic movement effects to button
-        moveAction.setPosition(CAMERA_WIDTH / 6 , CAMERA_HEIGHT / 2 - 35);
-        moveAction.setDuration(.5f);
-        startButton.addAction(moveAction);
-*/
+
         stage = new Stage(new FitViewport(CAMERA_WIDTH, CAMERA_HEIGHT));
         Gdx.input.setInputProcessor(stage);
         stage.addActor(BgImage);

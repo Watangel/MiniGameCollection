@@ -5,10 +5,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import java.util.Random;
 
-/**
- * Created by iuchi on 2017/07/24.
- */
-
 public class Bullet extends Sprite {
     public float bulletSpeed;
     public float speedParSec;

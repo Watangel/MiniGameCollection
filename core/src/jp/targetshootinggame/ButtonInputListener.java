@@ -5,10 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 
-/**
- * Created by iuchi on 2017/08/08.
- */
-
 public class ButtonInputListener extends InputListener {
     Button mButton;
     float buttonX, buttonY, buttonWidth, buttonHeight;

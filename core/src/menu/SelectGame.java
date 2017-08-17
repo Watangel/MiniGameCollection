@@ -15,15 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-import jp.MonckeyClimb.MonkeyShopScreen;
 import jp.MonckeyClimb.PlayScreen;
 import jp.targetshootinggame.TSGGameScreen;
 import jp.volcannogame.GameScreenWithStage;
-import jp.volcannogame.ShopScreen;
-
-/**
- * Created by iuchi on 2017/08/02.
- */
 
 public class SelectGame extends ScreenAdapter {
     static final float CAMERA_WIDTH = 300;

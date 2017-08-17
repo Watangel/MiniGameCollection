@@ -2,10 +2,6 @@ package jp.MonckeyClimb;
 
 import com.badlogic.gdx.graphics.Texture;
 
-/**
- * Created by iuchi on 2017/07/03.
- */
-
 public class Log extends ItemObject {
     public static final float LOG_WIDTH = 30 * 3;
     public static final float LOG_HEIGHT = 12 * 3;
@@ -16,10 +12,6 @@ public class Log extends ItemObject {
     public Log(Texture texture, int X, int Y, int Width, int Height) {
         super(texture, X, Y, Width, Height);
         setSize(LOG_WIDTH, LOG_HEIGHT);
-    }
-
-    public void acceltete(int accel){
-        accelaccel = accel;
     }
 
     public void update(float delta){

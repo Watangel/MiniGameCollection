@@ -2,10 +2,6 @@ package jp.volcannogame;
 
 import com.badlogic.gdx.graphics.Texture;
 
-/**
- * Created by iuchi on 2017/07/15.
- */
-
 public class Coin extends GameObject {
     public static final float COIN_WIDTH = 24f;
     public static final float COIN_HEIGHT = 24f;

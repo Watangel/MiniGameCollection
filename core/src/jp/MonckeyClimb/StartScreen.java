@@ -16,13 +16,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import menu.MiniGameCollection;
 
-/**
- * Created by iuchi on 2017/06/30.
- */
-
 public class StartScreen extends ScreenAdapter {
 
-  //  boolean check = false;
     MonkeyClimbStartButton MCSB;
     private MiniGameCollection originGame;
     Sprite sprite;
@@ -60,11 +55,6 @@ public class StartScreen extends ScreenAdapter {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
-/*        if(check){
-            game.setScreen(new PlayScreen(originGame));
-        }
-*/
         mCamera.update();
         originGame.batch.setProjectionMatrix(mCamera.combined);
 

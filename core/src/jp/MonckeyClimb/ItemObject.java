@@ -4,10 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 
-/**
- * Created by iuchi on 2017/06/28.
- */
-
 public class ItemObject extends Sprite {
     public final Vector2 vector;
 

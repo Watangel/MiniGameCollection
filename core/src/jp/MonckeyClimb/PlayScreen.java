@@ -330,28 +330,6 @@ public class PlayScreen extends ScreenAdapter {
             }
         }
 
-
-        //木の模様
-        for (int i = 0; i < csu.mTreePattern.size(); i++){
-
-            if (csu.mTreePattern.get(i).getY() + TreePattern.TREE_HEIGHT < mCamera.position.y - CAMERA_HEIGHT / 2){
-                csu.mTreePattern.remove(i);
-                i--;
-            } else {
-                csu.mTreePattern.get(i).draw(minioriginGame.batch);
-            }
-        }
-
-        //木の糸
-        for (int i = 0; i < csu.mTreesLine.size(); i++){
-            if (csu.mTreesLine.get(i).getY() + Tree.TREE_HEIGHT < mCamera.position.y - CAMERA_HEIGHT / 2){
-                csu.mTreesLine.remove(i);
-                i--;
-            } else {
-                csu.mTreesLine.get(i).draw(minioriginGame.batch);
-            }
-        }
-
         //木の部品
        for (int i = 0; i < csu.mTreeMaterial.size(); i++){
             //getY() + OOOOO はCSUのtreeMaterialdrawの中のsetSizeの最大値

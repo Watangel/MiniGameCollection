@@ -3,10 +3,6 @@ package menu;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-/**
- * Created by iuchi on 2017/07/29.
- */
-
 public class MiniGameCollection extends Game {
     public SpriteBatch batch;
 

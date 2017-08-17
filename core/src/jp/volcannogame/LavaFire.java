@@ -4,10 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
-/**
- * Created by iuchi on 2017/07/12.
- */
-
 public class LavaFire extends Sprite {
     public static int LAVAFIRE_STATE_STATIC = 0;
     public static int LAVAFIRE_STATE_DRAWABLE = 1;

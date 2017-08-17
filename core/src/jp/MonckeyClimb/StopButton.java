@@ -2,10 +2,6 @@ package jp.MonckeyClimb;
 
 import com.badlogic.gdx.graphics.Texture;
 
-/**
- * Created by iuchi on 2017/07/17.
- */
-
 public class StopButton extends ItemObject {
 
     public static final float STOPBUTTON_WIDTH = 420 / 10;

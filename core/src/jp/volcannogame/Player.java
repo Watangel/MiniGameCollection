@@ -1,11 +1,6 @@
 package jp.volcannogame;
 
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
-
-/**
- * Created by iuchi on 2017/06/30.
- */
 
 public class Player extends GameObject{
     //幅、高さ

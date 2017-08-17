@@ -20,12 +20,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import menu.MiniGameCollection;
 import menu.SelectShop;
-import menu.TestHomeScreen;
-
-/**
- * Created by iuchi on 2017/08/02.
- */
-
 public class MonkeyShopScreen extends ScreenAdapter {
     public static final float CAMERA_WIDTH = 300;
     public static final float CAMERA_HEIGHT = 450;

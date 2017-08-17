@@ -1,14 +1,7 @@
 package jp.volcannogame;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
-/**
- * Created by iuchi on 2017/07/17.
- */
 
 public class ShopCharaIcon extends Sprite {
     public static final float ICON_WIDTH = 57f;

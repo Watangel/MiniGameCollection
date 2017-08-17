@@ -13,7 +13,6 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -21,10 +20,6 @@ import menu.ButtonInputListener;
 import menu.MiniGameCollection;
 import menu.PlayerLevel;
 import menu.TestHomeScreen;
-
-/**
- * Created by iuchi on 2017/06/28.
- */
 
 public class GameOverScreen extends ScreenAdapter {
     static final float CAMERA_WIDTH = 600;
@@ -82,12 +77,6 @@ public class GameOverScreen extends ScreenAdapter {
         scoreFont.setColor(Color.GRAY);
         scoreFont.getData().setScale(1);
 
-        /*
-        //test
-        testes = new Sprite(new TextureRegion(test, 0, 0, 50, 50));
-        testes.setSize(64, 20);
-        */
-
         retryFont = new BitmapFont(Gdx.files.internal("fontretry.fnt"), Gdx.files.internal("fontretry_0.png"), false);
         retryFont.setColor(Color.GRAY);
         retryFont.getData().setScale(1);
@@ -102,7 +91,6 @@ public class GameOverScreen extends ScreenAdapter {
         buttonBg = new Sprite(new TextureRegion(buttonBackGround, 0, 0, 600, 400));
         buttonBg.setSize(BUTTON_BG_WIDTH, BUTTON_BG_HEIGHT);
         buttonBg.setPosition(BUTTON_BG_X, BUTTON_BG_Y);
-        //bBg = new Image(buttonBg);
 
         //ここからステージ
         //リトライボタン
@@ -143,7 +131,6 @@ public class GameOverScreen extends ScreenAdapter {
         });
 
         stage = new Stage(new FitViewport(CAMERA_WIDTH, CAMERA_HEIGHT));
-        //stage.addActor(bBg);
         stage.addActor(retryButton);
         stage.addActor(homeButton);
     }
@@ -168,15 +155,7 @@ public class GameOverScreen extends ScreenAdapter {
         Bg.draw(minioriginGame.batch);
         buttonBg.draw(minioriginGame.batch);
         playerLevel.levelDraw(LEVEL_X_CENTER, LEVEL_Y_CENTER, minioriginGame.batch);
-       /* Bg.draw(minioriginGame.batch);
-        scoreFont.draw(minioriginGame.batch, "COIN:" + mScore, 0 , CAMERA_HEIGHT / 2 + 80, CAMERA_WIDTH, Align.center, false);*/
-        /*testes.setPosition(CAMERA_WIDTH / 2 + 3, CAMERA_HEIGHT / 2 + 60);
-        testes.draw(minioriginGame.batch);*/
-        /*retryFont.draw(minioriginGame.batch, "Retry?", 0, CAMERA_HEIGHT / 2 - 80, CAMERA_WIDTH, Align.center, false);*/
         minioriginGame.batch.end();
-        /*if (Gdx.input.justTouched()){
-            minioriginGame.setScreen(new PlayScreen(minioriginGame));
-        }*/
         stage.draw();
 
     }

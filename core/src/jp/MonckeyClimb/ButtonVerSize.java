@@ -3,10 +3,6 @@ package jp.MonckeyClimb;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-/**
- * Created by iuchi on 2017/07/23.
- */
-
 public class ButtonVerSize extends Sprite {
     final int BUTTON_NOPUSH = 1;
     final int BUTTON_PUSHED = 2;
@@ -181,42 +177,3 @@ public class ButtonVerSize extends Sprite {
         return sizeCount;
     }
 }
-//元
-/*stopButton.setPosition(STOPBUTTON_X, STOPBUTTON_Y);
-        stopCancellButton.setPosition(STOPBUTTON_X, STOPBUTTON_Y);
-        if (STOPBUTTON_STATE == STOPBUTTON_NOPUSH){
-            stopButton.draw(minioriginGame.batch);
-        } else if (STOPBUTTON_STATE == STOPBUTTON_PUSHED){
-            stopbuttoncount++;
-            if (stopbuttoncount < 6){
-                stopbuttonsizecount--;
-            } else if (stopbuttoncount > 5 && stopbuttoncount < 11){
-                stopbuttonsizecount++;
-            } else if (stopbuttoncount == 11){
-                stopbuttoncount = 0;
-                stopbuttonsizecount = 0;
-                STOPBUTTON_STATE = STOPBUTTON_WAIT;
-                STOPCANCELLBUTTON_STATE = STOPCANCELLBUTTON_NOPUSH;
-            }
-            stopButton.setSize(StopButton.STOPBUTTON_WIDTH + stopbuttonsizecount * STOPBUTTON_SCALE, StopButton.STOPBUTTON_HEIGHT + stopbuttonsizecount * STOPBUTTON_SCALE);
-            stopButton.setPosition(STOPBUTTON_X - (stopbuttonsizecount * STOPBUTTON_SCALE) / 2, STOPBUTTON_Y - (stopbuttonsizecount * STOPBUTTON_SCALE) / 2);
-            stopButton.draw(minioriginGame.batch);
-        } else if (STOPCANCELLBUTTON_STATE == STOPCANCELLBUTTON_NOPUSH){
-            stopCancellButton.draw(minioriginGame.batch);
-        } else if (STOPCANCELLBUTTON_STATE == STOPCANCELLBUTTON_PUSHED){
-            stopbuttoncount++;
-            if (stopbuttoncount < 6){
-                stopbuttonsizecount--;
-            } else if (stopbuttoncount > 5 && stopbuttoncount < 11){
-                stopbuttonsizecount++;
-            } else if (stopbuttoncount == 11){
-                stopbuttoncount = 0;
-                stopbuttonsizecount = 0;
-                STOPCANCELLBUTTON_STATE = STOPCANCELLBUTTON_WAIT;
-                STOPBUTTON_STATE = STOPBUTTON_NOPUSH;
-            }
-            stopCancellButton.setSize(StopButton.STOPBUTTON_WIDTH + stopbuttonsizecount * STOPBUTTON_SCALE, StopButton.STOPBUTTON_HEIGHT + stopbuttonsizecount * STOPBUTTON_SCALE);
-            stopCancellButton.setPosition(STOPBUTTON_X - (stopbuttonsizecount * STOPBUTTON_SCALE) / 2, STOPBUTTON_Y - (stopbuttonsizecount * STOPBUTTON_SCALE) / 2);
-            stopCancellButton.draw(minioriginGame.batch);
-        }*/
-

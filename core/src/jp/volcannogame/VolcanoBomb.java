@@ -2,10 +2,6 @@ package jp.volcannogame;
 
 import com.badlogic.gdx.graphics.Texture;
 
-/**
- * Created by iuchi on 2017/07/02.
- */
-
 public class VolcanoBomb extends GameObject{
     public static final float BOMB_WIDTH = 24f;
     public static final float BOMB_HEIGHT = 24f;

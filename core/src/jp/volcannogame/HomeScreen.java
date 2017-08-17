@@ -21,10 +21,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import menu.MiniGameCollection;
 
-/**
- * Created by iuchi on 2017/07/11.
- */
-
 public class HomeScreen extends ScreenAdapter {
     static final float CAMERA_WIDTH = 450;
     static final float CAMERA_HEIGHT = 300;
